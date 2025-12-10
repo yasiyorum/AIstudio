@@ -1,0 +1,41 @@
+# AI Model Stüdyosu - Gereksinimler
+
+# === TEMEL KÜTÜPHANELER ===
+customtkinter>=5.2.0
+pillow>=10.0.0
+
+# === LANGCHAIN EKOSİSTEMİ ===
+langchain>=0.1.0
+langchain-community>=0.0.20
+langchain-core>=0.1.0
+langchain-text-splitters>=0.0.1
+langchain-huggingface>=0.0.1
+
+# === VEKTÖR VERİTABANI & EMBEDDINGS ===
+chromadb>=0.4.22
+sentence-transformers>=2.2.2
+
+# === OLLAMA ENTEGRASYONU ===
+ollama>=0.1.0
+
+# === DOSYA İŞLEME ===
+pypdf>=3.17.0
+python-docx>=1.1.0
+openpyxl>=3.1.2
+
+# === FINE-TUNING (Opsiyonel - Sadece Fine-Tuning için) ===
+# torch>=2.0.0  # NVIDIA: pip install torch --index-url https://download.pytorch.org/whl/cu121
+# torch>=2.0.0  # AMD ROCm: pip install torch --index-url https://download.pytorch.org/whl/rocm5.7
+# torch>=2.0.0  # CPU: pip install torch
+# transformers>=4.36.0
+# datasets>=2.16.0
+# trl>=0.7.0
+# unsloth>=2023.12  # pip install "unsloth[colab-new] @ git+https://github.com/unslothai/unsloth.git"
+
+# === EKSTRA (Google AI, Anthropic için) ===
+# google-generativeai>=0.3.0  # Google Gemini için
+# anthropic>=0.8.0  # Claude için
+# openai>=1.0.0  # OpenAI GPT için (API key gerekli)
+
+# NOT: Fine-tuning kullanmayacaksanız torch ve ilgili kütüphaneleri kurmanıza gerek yok.
+# RAG ve Ollama Modelfile özellikleri için yukarıdaki temel paketler yeterlidir.
