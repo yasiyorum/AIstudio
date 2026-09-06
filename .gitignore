@@ -31,6 +31,7 @@ chat_history/
 finetune_output/
 training_workspace/
 data_storage/
+scratch_models/
 
 # IDE
 .vscode/

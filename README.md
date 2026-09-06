@@ -1,204 +1,166 @@
-# 🤖 AI Model Stüdyosu
+# 🤖 AI Model Stüdyosu (v2.5 Modern & Restorasyonlu Sürüm)
 
-Modern yapay zeka modelleri oluşturun ve eğitin. RAG, Ollama Modelfile ve Fine-Tuning desteği ile güçlü AI asistanları yaratın.
+Yerel (**Ollama**) ve bulut tabanlı (**OpenAI**, **Google Gemini**, **Anthropic Claude**) yapay zeka modelleriyle çalışan, modern ve modüler bir AI geliştirme platformu.
 
-## ✨ Özellikler
+Kullanıcı dostu masaüstü arayüzü (`CustomTkinter`) sayesinde teknik kodlama gerektirmeden **5 farklı model oluşturma stratejisini**, gerçek zamanlı **token streaming sohbeti**, **RAG doküman yönetimini** ve **otomatik ayar kalıcılığını** tek çatı altında sunar.
 
-### 🎓 3 Model Oluşturma Stratejisi
+---
+
+## ✨ Temel Özellikler
+
+### 🎓 5 Model Oluşturma Stratejisi
 
 1. **📚 Bilgi Bankası (RAG)**
-   - Hızlı ve kolay
-   - GPU gerektirmez
-   - Büyük dosyalarla çalışır
-   - Vektör veritabanı kullanır
+   - Vektör veritabanı tabanlı (`ChromaDB` + `all-MiniLM-L6-v2`)
+   - Büyük dosyalarla çalışır, GPU gerektirmez (CPU dostu)
+   - PDF, DOCX, TXT, Excel, **CSV, JSON ve JSONL** desteği
+   - Model içerisindeki dokümanları tek tek inceleme ve silme desteği
 
 2. **🚀 Taşınabilir Model (Ollama Modelfile)**
-   - Orta boyut modeller
-   - Başka bilgisayarlarda çalışır
-   - Ollama ile entegre
-   - GPU gerektirmez
+   - Doküman içeriğini doğrudan Ollama sistem istemine gömer
+   - Farklı bilgisayarlara taşınabilir, GPU gerektirmez
+   - Ollama ile yerel olarak tek komutla çalışır
 
-3. **🔬 Gerçek Eğitim (Fine-Tuning)**
-   - Model ağırlıklarını değiştirir
-   - GPU/CPU/AMD/Apple Silicon desteği
-   - LoRA ile verimli eğitim
-   - Unsloth kütüphanesi kullanır
+3. **🧠 Beyin Modeli (Talimat Tabanlı)**
+   - Dosyasız veya opsiyonel dosyalarla çalışır
+   - Özel asistan kişiliği, uzmanlık alanı ve davranış kuralları tanımlar
 
-### 💬 Akıllı Sohbet Sistemi
+4. **🔬 Gerçek Eğitim (Fine-Tuning)**
+   - Model ağırlıklarını kalıcı olarak eğitir
+   - LoRA (PEFT) ve Unsloth kütüphanesi ile yüksek verim
+   - Eğitim sonunda GGUF formatına dönüştürüp doğrudan Ollama'ya aktarma
 
-- Sohbet geçmişi kaydedilir
-- Geçmiş konuşmalara dönülebilir
-- Model başına ayrı geçmiş
-- Geçmiş sohbetleri silme
+5. **🧪 Sıfırdan Eğitim (Scratch GPT-2)**
+   - Hazır ağırlık kullanmadan sıfırdan BPE Tokenizer ve GPT-2 mimarisi eğitir
+   - Deneysel modelleme ve yapay zeka eğitimi süreçlerini öğrenmek için idealdir
 
-### 🤖 Çoklu AI Sağlayıcı
+---
 
-- **Ollama** (Yerel - Ücretsiz)
-- **OpenAI** (GPT-4, GPT-3.5)
-- **Google AI** (Gemini)
-- **Anthropic** (Claude)
+### 💬 Gelişmiş Sohbet Deneyimi
 
-### 🎨 Modern Arayüz
+- **⚡ Canlı Token Streaming:** Yanıtlar harf harf ekrana akar (ChatGPT / Claude akıcılığında).
+- **⏹ Yanıtı Durdurma:** Model yanıt üretirken tek tıkla üretimi kesebilme imkanı.
+- **💻 Zengin Kod Blokları:** Yanıttaki kod parçacıkları (` ```python ` vb.) özel kutularda gösterilir ve bağımsız "Kopyala" butonuna sahiptir.
+- **📜 Akıllı Oturum Geçmişi:** Konuşmalar model bazlı olarak zaman damgalı JSON dosyalarında saklanır; geçmiş sohbetler kolayca yüklenip silinebilir.
+- **🔍 Tıklanabilir Kaynaklar:** RAG bilgi bankası ile yapılan sohbetlerde yanıtın dayandığı kaynak dosyalar gösterilir.
 
-- Karanlık tema
-- Responsive tasarım
-- Açılıp kapanan yan paneller
-- Emoji'lerle zenginleştirilmiş
+---
+
+### 🤖 Çoklu AI Motoru Desteği
+
+- **Ollama (Yerel & Ücretsiz):** `llama3`, `deepseek-r1`, `qwen2.5`, `mistral`, `phi3` vb.
+- **OpenAI:** `gpt-4o-mini`, `gpt-4o`, `gpt-3.5-turbo` (RAG destekli veya bağımsız sohbet)
+- **Google AI:** `gemini-1.5-flash`, `gemini-pro`
+- **Anthropic:** `claude-3-haiku`, `claude-3-5-sonnet`
+
+---
+
+### ⚙️ Kalıcı Ayar ve Sistem Yönetimi
+
+- **Otomatik Kalıcılık (`config.json`):** Seçilen AI sağlayıcısı, API anahtarları ve model tercihleri oturumlar arasında güvenle saklanır.
+- **Dönen Loglama (`app.log`):** Tüm sistem olayları seviyeli (INFO, WARNING, ERROR) olarak hem terminale hem de log dosyasına yazılır.
+- **Birim Testleri (`tests/test_core.py`):** Çekirdek modülleri doğrulayan otomatik test paketi.
+
+---
+
+## 📁 Proje Mimarisi
+
+```
+AI studio/
+├── main.py                    # Uygulama ana giriş noktası
+├── run.bat                    # Windows otomatik başlatıcı
+├── run.sh                     # Linux/macOS otomatik başlatıcı
+├── requirements.txt           # Python bağımlılıkları
+│
+├── backend/                   # Arka plan iş mantığı & AI motoru
+│   ├── __init__.py
+│   ├── chat_engine.py         # Sohbet motoru, streaming & hafıza yönetimi
+│   ├── model_manager.py       # 5 model stratejisi, RAG & doküman yönetimi
+│   ├── config_manager.py      # Thread-safe kalıcı ayar yöneticisi
+│   └── logger.py              # Merkezi loglama altyapısı
+│
+├── ui/                        # Grafik kullanıcı arayüzü (CustomTkinter)
+│   ├── __init__.py
+│   ├── app_ui.py              # Ana pencere ve sayfa denetleyicileri
+│   ├── theme.py               # Modern karanlık tema renkleri & tipografi
+│   └── widgets.py             # ChatBubble, TypingIndicator, LoadingOverlay
+│
+├── tests/                     # Birim testleri
+│   └── test_core.py           # Otomatik unittest paketi
+│
+├── models_db/                 # RAG ChromaDB vektör veritabanları
+├── chat_history/              # Sohbet geçmişi JSON dosyaları
+└── data_storage/              # config.json ve app.log deposu
+```
+
+---
 
 ## 🚀 Kurulum
 
 ### 1. Gereksinimler
-
-- Python 3.9+
-- Ollama (yerel modeller için) - [ollama.com](https://ollama.com)
+- **Python 3.9+** (Python 3.10, 3.11 veya 3.12 önerilir)
+- **Ollama** (Yerel modeller için ücretsiz): [ollama.com/download](https://ollama.com/download)
 
 ### 2. Bağımlılıkları Yükleyin
 
-**Temel özellikler (RAG + Ollama Modelfile):**
 ```bash
 pip install -r requirements.txt
 ```
 
-**Fine-Tuning için ek paketler:**
-
-NVIDIA GPU:
-```bash
-pip install torch --index-url https://download.pytorch.org/whl/cu121
-pip install transformers datasets trl
-pip install "unsloth[colab-new] @ git+https://github.com/unslothai/unsloth.git"
-```
-
-AMD GPU (ROCm):
-```bash
-pip install torch --index-url https://download.pytorch.org/whl/rocm5.7
-pip install transformers datasets trl
-```
-
-CPU veya Apple Silicon:
-```bash
-pip install torch transformers datasets trl
-```
+*(İsteğe bağlı: Fine-tuning kullanacaksanız PyTorch ve Unsloth paketlerini yükleyin.)*
 
 ### 3. Çalıştırın
 
-Windows:
-```bash
+**Windows:**
+```cmd
 run.bat
 ```
 
-Veya doğrudan:
+**Linux / macOS:**
+```bash
+chmod +x run.sh
+./run.sh
+```
+
+**Doğrudan Python ile:**
 ```bash
 python main.py
 ```
 
-## 📖 Kullanım
+---
 
-### RAG Modeli Oluşturma
+## 🧪 Testleri Çalıştırma
 
-1. **Modellerim** → **Bilgi Bankası** seçin
-2. Model adı girin
-3. PDF, DOCX, TXT, Excel dosyalarını seçin
-4. **Modeli Oluştur** butonuna tıklayın
-5. Saniyeler içinde hazır!
+Projenin çekirdek bileşenlerini test etmek için:
 
-### Taşınabilir Model Oluşturma
-
-1. **Modellerim** → **Taşınabilr Model** seçin
-2. Baz model seçin (Ollama modellerinizden)
-3. Dosyalarınızı seçin
-4. Model oluşturulacak ve Ollama'ya eklenecek
-
-### Fine-Tuning
-
-1. **Modellerim** → **Gerçek Eğitim** seçin
-2. Baz model seçin
-3. Eğitim dosyalarını yükleyin
-4. Eğitim başlayacak (GPU gerektirir)
-5. Model otomatik kaydedilir
-
-### Sohbet
-
-1. **Sohbet** sayfasına gidin
-2. Model seçin (dropdown menüden)
-3. Mesajınızı yazın ve gönderin
-4. Sol üstteki ☰ ile geçmiş sohbetleri açın
-
-### Ayarlar
-
-- **AI Motoru**: Ollama, OpenAI, Google veya Anthropic
-- **RAG Modeli**: Hangi Ollama modelini kullanacak
-- **Sohbet Geçmişi**: Klasörü aç veya sil
-
-## 📁 Proje Yapısı
-
+```bash
+python -m unittest tests/test_core.py
 ```
-aiteacher/
-├── main.py                 # Ana giriş noktası
-├── run.bat                 # Windows başlatıcı
-├── requirements.txt        # Bağımlılıklar
-├── backend/
-│   ├── model_manager.py   # Model oluşturma & yönetimi
-│   └── chat_engine.py     # Sohbet motoru
-├── ui/
-│   └── app_ui.py          # Kullanıcı arayüzü
-├── models_db/             # RAG modelleri (ChromaDB)
-├── chat_history/          # Sohbet geçmişi (JSON)
-└── finetune_output/       # Fine-tune edilmiş modeller
-```
-
-## 🛠️ Sistem Gereksinimleri
-
-### Minimum (RAG & Ollama Modelfile)
-- CPU: Herhangi bir modern işlemci
-- RAM: 8GB
-- Disk: 5GB
-
-### Önerilen (Fine-Tuning ile)
-- GPU: NVIDIA RTX 3060+ (8GB VRAM)
-- RAM: 16GB
-- Disk: 20GB
-
-### Desteklenen GPU'lar
-- ✅ NVIDIA (CUDA) - En hızlı
-- ✅ AMD (ROCm) - Deneysel
-- ✅ Apple Silicon (MPS) - M1/M2/M3
-- ✅ CPU - Yavaş ama çalışır
-
-## 🤝 Katkıda Bulunma
-
-1. Fork yapın
-2. Feature branch oluşturun
-3. Değişikliklerinizi commit edin
-4. Pull request gönderin
-
-## 📝 Lisans
-
-MIT License
-
-## 🔗 Kaynaklar
-
-- [Ollama](https://ollama.com) - Yerel LLM çalıştırma
-- [LangChain](https://langchain.com) - LLM framework
-- [Unsloth](https://github.com/unslothai/unsloth) - Hızlı fine-tuning
-- [ChromaDB](https://www.trychroma.com) - Vektör veritabanı
-
-## ❓ Sık Sorulan Sorular
-
-**Q: GPU olmadan kullanabilir miyim?**
-A: Evet! RAG ve Ollama Modelfile GPU gerektirmez. Fine-tuning için GPU önerilir ama CPU ile de çalışır (yavaş).
-
-**Q: Hangi dosya formatları destekleniyor?**
-A: PDF, DOCX, DOC, TXT, XLSX, XLS
-
-**Q: Ollama nedir?**
-A: Yerel bilgisayarınızda LLM çalıştırmanızı sağlayan ücretsiz bir araç.
-
-**Q: API anahtarı gerekli mi?**
-A: Ollama için hayır (ücretsiz). OpenAI/Google/Anthropic için evet.
-
-**Q: Fine-tuning ne kadar sürer?**
-A: GPU ile 5-10 dakika, CPU ile 2-6 saat (veri boyutuna bağlı).
 
 ---
 
-💡 **İpucu**: İlk başta RAG (Bilgi Bankası) ile başlayın. En hızlı ve kolay yöntemdir!
+## 📖 Kullanım Kılavuzu
+
+### 1. RAG Modeli Oluşturma ve Yönetme
+1. **Modellerim** sayfasına gidin.
+2. Strateji olarak **📚 Bilgi Bankası** seçin.
+3. Model ismi girin ve dokümanlarınızı (PDF, Word, Excel, CSV, JSON, TXT) seçin.
+4. **Modeli Oluştur** butonuna tıklayın.
+5. Oluşturulan modelin dokümanlarını incelemek veya tekil dosyaları silmek için sayfanın altındaki **"📚 Bilgi Bankası (RAG) Doküman Yöneticisi"** kartını kullanın.
+
+### 2. Sohbet ve Canlı Streaming
+1. **Sohbet** sayfasına gidin.
+2. Üstteki menüden bir model seçin.
+3. Sorunuzu yazın ve **Gönder ➤** butonuna basın.
+4. Yanıt canlı olarak akarken istediğiniz an **⏹ Durdur** butonuna basarak üretimi sonlandırabilirsiniz.
+5. Kod bloklarını sağ üstteki **Kopyala** butonuyla anında panoya kopyalayabilirsiniz.
+
+### 3. Ayarlar
+- AI motorunu **Ollama**, **OpenAI**, **Google AI** veya **Anthropic** olarak belirleyin.
+- Bulut modelleri için API anahtarınızı girip **💾 Ayarları Kaydet** butonuna tıklayın.
+
+---
+
+## 📝 Lisans
+
+MIT License © 2026 AI Model Stüdyosu
